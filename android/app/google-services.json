@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "958405241222",
+    "project_id": "tokosaya-ef173",
+    "storage_bucket": "tokosaya-ef173.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958405241222:android:9737fc69187cd7f089e407",
+        "android_client_info": {
+          "package_name": "com.ardi.project_akhir_toko"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958405241222-rskinseljlhsn5grnlr0d81eik8krvm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwHBAqg1KsPfmkdwO0aqP8pm6EKbZyeqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958405241222-rskinseljlhsn5grnlr0d81eik8krvm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
