@@ -3,10 +3,12 @@ import "package:flutter/material.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:project_akhir_toko/ui/component/bottomNavigationBar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:project_akhir_toko/ui/catat_pembukuan.dart';
 import 'package:project_akhir_toko/ui/component/item_category.dart';
 import 'package:project_akhir_toko/ui/kelola_stock.dart';
 import 'package:project_akhir_toko/ui/lainnya_page.dart';
+import 'package:project_akhir_toko/ui/laporan_usaha.dart';
 import 'package:project_akhir_toko/ui/pembukuan.dart';
 import 'package:project_akhir_toko/ui/style/colors.dart';
 
@@ -230,7 +232,9 @@ class _HomePageState extends State<HomePage> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Get.to(() => const LaporanUsaha());
+                                          },
                                           child: SizedBox(
                                             child: Column(children: [
                                               CircleAvatar(
@@ -248,13 +252,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CatatPembukuan(),
-                                              ),
-                                            );
+                                            Get.to(() => CatatPembukuan());
                                           },
                                           child: SizedBox(
                                             child: Column(children: [
@@ -273,13 +271,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    KelolaStock(),
-                                              ),
-                                            );
+                                            Get.to(() => KelolaStock());
                                           },
                                           child: SizedBox(
                                             child: Column(

@@ -28,10 +28,12 @@ class Pembukuan extends StatelessWidget {
               height: size.height - (size.height / 5),
               width: size.width,
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(34),
-                      topRight: Radius.circular(34))),
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(34),
+                  topRight: Radius.circular(34),
+                ),
+              ),
             ),
           )
         ],

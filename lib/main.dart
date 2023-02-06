@@ -1,8 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_akhir_toko/firebase_options.dart';
+import 'package:project_akhir_toko/ui/catat_pembukuan.dart';
+import 'package:project_akhir_toko/ui/kelola_stock.dart';
+import 'package:project_akhir_toko/ui/laporan_usaha.dart';
 import 'package:project_akhir_toko/ui/main_page.dart';
 import 'package:project_akhir_toko/ui/login_page.dart';
+import 'package:project_akhir_toko/ui/updateProduct.dart';
 // import 'package:project_akhir_toko/ui/style/colors.dart';
 
 void main() async {
@@ -17,9 +22,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainPage(),
+      getPages: [
+        GetPage(
+          name: "/laporanUsaha",
+          page: () => const LaporanUsaha(),
+        ),
+        GetPage(
+          name: "/CatatPembukuan",
+          page: () => CatatPembukuan(),
+        ),
+        GetPage(
+          name: "/KelolaStock",
+          page: () => KelolaStock(),
+        ),
+        // GetPage(
+        //   name: "/UpdateKelolaStock",
+        //   page: () => UpdateStock(),
+        // )
+      ],
     );
   }
 }

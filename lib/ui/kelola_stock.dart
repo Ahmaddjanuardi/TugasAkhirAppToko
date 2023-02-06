@@ -3,22 +3,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:project_akhir_toko/ui/add_barang_baru.dart';
-import 'package:project_akhir_toko/ui/component/tab_bar.dart';
+import 'package:get/get.dart';
+import 'package:project_akhir_toko/controllers/cart_controller.dart';
+import 'package:project_akhir_toko/ui/add_barang_baru_screen.dart';
+import 'package:project_akhir_toko/ui/widget/widget_kelola_stock.dart';
+// import 'package:project_akhir_toko/ui/widget/cart_products.dart';
+// import 'package:project_akhir_toko/ui/component/tab_bar.dart';
 import 'package:project_akhir_toko/ui/style/colors.dart';
 
-class KelolaStock extends StatefulWidget {
-  const KelolaStock({Key? key}) : super(key: key);
-
-  @override
-  State<KelolaStock> createState() => _KelolaStockState();
-}
-
-class _KelolaStockState extends State<KelolaStock> {
+class KelolaStock extends StatelessWidget {
+  KelolaStock({Key? key}) : super(key: key);
+  final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference addData = firestore.collection('addData');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: Stack(children: [
@@ -36,7 +33,7 @@ class _KelolaStockState extends State<KelolaStock> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Get.back();
                             },
                             icon: const Icon(
                               Icons.arrow_back,
@@ -84,109 +81,27 @@ class _KelolaStockState extends State<KelolaStock> {
                             Expanded(
                               child: TabBarView(
                                 children: [
-                                  StreamBuilder<QuerySnapshot>(
-                                    stream: addData.snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return SingleChildScrollView(
-                                          controller: ScrollController(),
-                                          child: Column(
-                                              children: snapshot.data!.docs
-                                                  .map((e) => Container(
-                                                        margin:
-                                                            EdgeInsets.all(10),
-                                                        width: double.infinity,
-                                                        height: 150,
-                                                        padding:
-                                                            EdgeInsets.all(25),
-                                                        decoration: BoxDecoration(
-                                                            color:
-                                                                AppColors.green,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        14)),
-                                                        child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            children: [
-                                                              SizedBox(
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    CircleAvatar(
-                                                                      child: Text(e["namaBarang"] ==
-                                                                              ""
-                                                                          ? "A"
-                                                                          : "${e["namaBarang"][0]}"),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      height:
-                                                                          15,
-                                                                    ),
-                                                                    Column(
-                                                                      children: [
-                                                                        Text(e[
-                                                                            "namaBarang"]),
-                                                                        Text(
-                                                                            "Harga Jual : ${e["hargaJual"]} / Item"),
-                                                                      ],
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-
-                                                              // Column(
-                                                              //   mainAxisAlignment:
-                                                              //       MainAxisAlignment
-                                                              //           .spaceAround,
-                                                              //   children: [
-                                                              //     Text(e[
-                                                              //         "namaBarang"]),
-                                                              //     Text(
-                                                              //         "Harga Jual : ${e["hargaJual"]} per item"),
-                                                              //   ],
-                                                              // ),
-                                                              SizedBox(
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    OutlinedButton(
-                                                                      style: OutlinedButton
-                                                                          .styleFrom(
-                                                                        foregroundColor:
-                                                                            Colors.blueGrey,
-                                                                      ),
-                                                                      onPressed:
-                                                                          () {},
-                                                                      child: const Text(
-                                                                          "Atur Stock"),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      height:
-                                                                          10,
-                                                                    ),
-                                                                    Text("Stock: " +
-                                                                        e["stockSaatIni"]
-                                                                            .toString()),
-                                                                  ],
-                                                                ),
-                                                              )
-                                                            ]),
-                                                      ))
-                                                  .toList()),
-                                        );
-                                      } else {
-                                        return Text("Loading");
-                                      }
+                                  LayoutBuilder(
+                                    builder: (_, constraints) {
+                                      return Column(
+                                        children: [
+                                          // SizedBox(
+                                          //   height:
+                                          //       constraints.maxHeight * 0.05,
+                                          // ),
+                                          // SizedBox(
+                                          //     height:
+                                          //         constraints.maxHeight * 0.6,
+                                          //     child: CatalogKelolaStock()),
+                                          CatalogKelolaStock()
+                                        ],
+                                      );
                                     },
                                   ),
-                                  SingleChildScrollView(),
+                                  const Icon(
+                                    Icons.developer_board,
+                                    size: 24.0,
+                                  ),
                                 ],
                               ),
                             ),

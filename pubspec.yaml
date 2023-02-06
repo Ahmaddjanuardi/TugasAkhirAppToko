@@ -45,6 +45,8 @@ dependencies:
   url_launcher: ^5.0.2
   http: ^0.13.5
   provider: ^6.0.5
+  quantity_input: ^1.0.2
+  get: ^4.6.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

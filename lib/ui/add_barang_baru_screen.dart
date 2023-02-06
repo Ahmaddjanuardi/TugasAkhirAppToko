@@ -2,6 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project_akhir_toko/controllers/product_controller.dart';
+import 'package:project_akhir_toko/model/product_model.dart';
+import 'package:project_akhir_toko/services/firestore_db.dart';
 import 'package:project_akhir_toko/ui/style/colors.dart';
 
 const List<String> list = <String>[
@@ -20,9 +24,14 @@ class Add_Barang_Baru extends StatefulWidget {
 }
 
 class _Add_Barang_BaruState extends State<Add_Barang_Baru> {
-  String dropdownValue = list.first;
+  String? dropdownValue = null;
+
+  final ProductController productController = Get.find();
+
+  FireStoreDB fireStoreDB = FireStoreDB();
 
   final _formKey = GlobalKey<FormState>();
+  final _formKey1 = GlobalKey<FormState>();
 
   final TextEditingController namaBarang = TextEditingController();
   final TextEditingController hargaJual = TextEditingController();
@@ -59,7 +68,7 @@ class _Add_Barang_BaruState extends State<Add_Barang_Baru> {
                       ),
                     ),
                     Text(
-                      "Kelola Stock",
+                      "Tambah Stock",
                       style: TextStyle(fontSize: 30),
                     ),
                   ],
@@ -81,7 +90,7 @@ class _Add_Barang_BaruState extends State<Add_Barang_Baru> {
                         topLeft: Radius.circular(34),
                         topRight: Radius.circular(34))),
                 child: Form(
-                  key: _formKey,
+                  key: _formKey1,
                   child: Column(
                     children: [
                       Container(
@@ -186,6 +195,8 @@ class _Add_Barang_BaruState extends State<Add_Barang_Baru> {
                             value: dropdownValue,
                             icon: const Icon(Icons.arrow_downward),
                             elevation: 16,
+                            validator: (value) =>
+                                value == null ? "Pilih Kategori" : null,
                             onChanged: (String? value) {
                               setState(() {
                                 dropdownValue = value!;
@@ -278,26 +289,41 @@ class _Add_Barang_BaruState extends State<Add_Barang_Baru> {
                                   BorderRadius.circular(12), // <-- Radius
                             ),
                           ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              addData.add({
-                                "namaBarang": namaBarang.text,
-                                "hargaJual": int.tryParse(hargaJual.text) ?? 0,
-                                "hargaModal":
-                                    int.tryParse(hargaModal.text) ?? 0,
-                                "kategori": dropdownValue,
-                                "stockSaatIni":
-                                    int.tryParse(stockSaatIni.text) ?? 0,
-                                "stockMinimum":
-                                    int.tryParse(stockMinimum.text) ?? 0
-                              });
+                          onPressed: () async {
+                            if (_formKey1.currentState!.validate()) {
+                              fireStoreDB.addData(
+                                Product(
+                                  id: '',
+                                  namaBarang: namaBarang.text,
+                                  hargaJual: hargaJual.text,
+                                  hargaModal: hargaModal.text,
+                                  kategori: dropdownValue!,
+                                  stockSaatIni: stockSaatIni.text,
+                                  stockMinimum: stockMinimum.text,
+                                ),
+                              );
+                              // await FireStoreDB.addData(productModel);
+
+                              // addData.add({
+                              //   "namaBarang": namaBarang.text,
+                              //   "hargaJual": int.tryParse(hargaJual.text) ?? 0,
+                              //   "hargaModal":
+                              //       int.tryParse(hargaModal.text) ?? 0,
+                              //   "kategori": dropdownValue,
+                              //   "stockSaatIni":
+                              //       int.tryParse(stockSaatIni.text) ?? 0,
+                              //   "stockMinimum":
+                              //       int.tryParse(stockMinimum.text) ?? 0
+                              // });
                               namaBarang.text = "";
                               hargaJual.text = "";
                               hargaModal.text = "";
                               dropdownValue = list.first;
+                              // kategori.text = "";
                               stockSaatIni.text = "";
                               stockMinimum.text = "";
-                              Navigator.of(context).pop();
+                              // Navigator.of(context).pop();
+                              Get.back();
                             }
                           },
                           child: const Text("Save"),
