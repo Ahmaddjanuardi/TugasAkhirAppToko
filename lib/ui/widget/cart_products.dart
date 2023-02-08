@@ -46,6 +46,7 @@ class CartProductCart extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.amber),
+        margin: const EdgeInsets.all(10),
         child: Row(
           children: [
             // CircleAvatar(

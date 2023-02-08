@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ]),
                             ),
-                            SizedBox(
+                            Container(
                               child: Column(
                                 children: [
                                   Text(
@@ -114,81 +114,91 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  SizedBox(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadiusDirectional
+                                                    .circular(20),
+                                            color: Colors.white54,
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.network(
+                                              "https://cdn-icons-png.flaticon.com/512/5949/5949926.png",
+                                              width: 64.0,
+                                              height: 64.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        ),
+                                        Text("Kirim"),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadiusDirectional
+                                                    .circular(20),
+                                            color: Colors.white54,
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.network(
+                                              "https://cdn-icons-png.flaticon.com/512/3135/3135706.png",
+                                              width: 64.0,
+                                              height: 64.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        ),
+                                        Text("Tagih"),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadiusDirectional
+                                                    .circular(20),
+                                            color: Colors.white54,
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.network(
+                                              "https://cdn-icons-png.flaticon.com/512/9359/9359442.png",
+                                              width: 64.0,
+                                              height: 64.0,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        ),
+                                        Text("QRIS"),
+                                      ],
+                                    ),
+                                  ),
+                                ]),
+                            SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColors.blue,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    SizedBox(
-                                      child: Column(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundColor: Colors.white,
-                                            child: IconButton(
-                                              onPressed: () {},
-                                              icon: Image.network(
-                                                "https://cdn-icons-png.flaticon.com/512/5949/5949926.png",
-                                                width: 64.0,
-                                                height: 64.0,
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                            // Text("Bayar"),
-                                          ),
-                                          Text("Bayar"),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      child: Column(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundColor: Colors.white,
-                                            child: IconButton(
-                                              onPressed: () {},
-                                              icon: Image.network(
-                                                "https://cdn-icons-png.flaticon.com/512/3135/3135706.png",
-                                                width: 64.0,
-                                                height: 64.0,
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                          Text("Tagih"),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      child: Column(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundColor: Colors.white,
-                                            child: IconButton(
-                                              onPressed: () {},
-                                              icon: Image.network(
-                                                "https://cdn-icons-png.flaticon.com/512/9359/9359442.png",
-                                                width: 64.0,
-                                                height: 64.0,
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                          Text("QRIS"),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
                           ]),
                     ),
                     // SizedBox(

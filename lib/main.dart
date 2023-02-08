@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_akhir_toko/firebase_options.dart';
 import 'package:project_akhir_toko/ui/catat_pembukuan.dart';
+import 'package:project_akhir_toko/ui/detail_history_screen.dart';
 import 'package:project_akhir_toko/ui/kelola_stock.dart';
 import 'package:project_akhir_toko/ui/laporan_usaha.dart';
 import 'package:project_akhir_toko/ui/main_page.dart';
@@ -38,10 +39,13 @@ class MyApp extends StatelessWidget {
           name: "/KelolaStock",
           page: () => KelolaStock(),
         ),
-        // GetPage(
-        //   name: "/UpdateKelolaStock",
-        //   page: () => UpdateStock(),
-        // )
+        GetPage(
+          name: "/DetailHistory",
+          page: () {
+            var itemId = Get.parameters["id"];
+            return DetailHistory(itemId: itemId!);
+          },
+        )
       ],
     );
   }

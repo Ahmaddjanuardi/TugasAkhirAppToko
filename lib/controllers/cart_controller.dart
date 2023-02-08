@@ -21,7 +21,7 @@ class CartController extends GetxController {
   }
 
   void removeProduct(Product product) {
-    if (_products.containsKey(products) && _products[product]) {
+    if (_products.containsKey(product) && _products[product] == 1) {
       _products.removeWhere((key, value) => key == product);
     } else {
       _products[product] -= 1;
@@ -46,7 +46,7 @@ class CartController extends GetxController {
     }
   }
 
-  get hargaModal {
+  get modal {
     if (_products.isNotEmpty) {
       return _products.entries
           .map((product) => int.parse(product.key.hargaModal) * product.value)
@@ -63,7 +63,7 @@ class CartController extends GetxController {
       return _products.entries
           .map((product) =>
               int.parse(product.key.hargaJual) -
-              int.parse(product.key.hargaModal) * product.value)
+              int.parse(product.key.hargaModal))
           .toList()
           .reduce((value, element) => value + element)
           .toString();

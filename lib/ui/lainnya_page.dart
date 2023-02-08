@@ -18,7 +18,15 @@ class Lainnya extends StatelessWidget {
             child: SafeArea(
                 child: Align(
               alignment: Alignment.topCenter,
-              child: Column(),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("Akun Saya", style: TextStyle(fontSize: 30))
+                    ],
+                  ),
+                ],
+              ),
             )),
           ),
           Align(
@@ -32,6 +40,53 @@ class Lainnya extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(34),
                       topRight: Radius.circular(34))),
+              child: Column(children: [
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CircleAvatar(
+                        radius: 28.0,
+                        backgroundImage: NetworkImage(
+                          "https://i.ibb.co/PGv8ZzG/me.jpg",
+                        ),
+                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      Column(
+                        children: [Text("NamaAkun"), Text("NoTel")],
+                      ),
+                      // ElevatedButton(
+                      //   style: ElevatedButton.styleFrom(
+                      //     backgroundColor: Colors.cyanAccent.shade400,
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(12),
+                      //     ),
+                      //   ),
+                      //   onPressed: () {},
+                      //   child: const Text("Update Profile"),
+                      // ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.mode_edit_outline_outlined,
+                          size: 30.0,
+                          color: Colors.amberAccent,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Text("Account"),
+                  ],
+                )
+              ]),
             ),
           )
         ],

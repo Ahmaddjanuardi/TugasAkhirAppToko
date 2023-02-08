@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_akhir_toko/controllers/cart_controller.dart';
 import 'package:project_akhir_toko/controllers/product_controller.dart';
+import 'package:project_akhir_toko/services/firestore_db.dart';
 // import 'package:project_akhir_toko/model/product_model.dart';
 
 class CatalogProducts extends StatelessWidget {
@@ -63,6 +64,13 @@ class CatalogProductCard extends StatelessWidget {
               },
               icon: const Icon(
                 Icons.add_circle,
+                size: 24.0,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.delete,
                 size: 24.0,
               ),
             ),

@@ -1,6 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 import 'package:project_akhir_toko/controllers/cart_controller.dart';
+import 'package:project_akhir_toko/controllers/history_controller.dart';
+import 'package:project_akhir_toko/model/history_model.dart';
+import 'package:project_akhir_toko/services/firestore_db.dart';
 import 'package:project_akhir_toko/ui/widget/cart_products.dart';
 import 'package:project_akhir_toko/ui/widget/cart_total.dart';
 import 'package:project_akhir_toko/ui/daftar_product_pembukuan.dart';
@@ -9,6 +14,13 @@ import 'package:get/get.dart';
 
 class CatatPembukuan extends StatelessWidget {
   CatatPembukuan({Key? key}) : super(key: key);
+  // final HistoryController historyController = Get.find();
+
+  final historyControllerSub = Get.put(HistoryController());
+  FireStoreDB fireStoreDB = FireStoreDB();
+
+  final DateTime date2 = DateTime.now();
+
   final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
@@ -113,11 +125,40 @@ class CatatPembukuan extends StatelessWidget {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: constraints.maxHeight * 0.05,
+                                          height: constraints.maxHeight * 0.03,
                                         ),
                                         SizedBox(
-                                            height: constraints.maxHeight * 0.6,
+                                            height: constraints.maxHeight * 0.5,
                                             child: CartProducts()),
+                                        Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: OutlinedButton(
+                                            style: OutlinedButton.styleFrom(
+                                              foregroundColor: Colors.green,
+                                              side: const BorderSide(
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                            //  final DateTime date2 = DateTime.now(),
+                                            onPressed: () async {
+                                              fireStoreDB.addHistory(History(
+                                                  id: '',
+                                                  tanggalBeli:
+                                                      "${DateFormat('yyyy-MM-dd').format(date2)}",
+                                                  totalHarga: 'totalHarga'));
+                                              //
+                                              await fireStoreDB.addSubHistory(
+                                                  DaftarBeli(
+                                                      id: '',
+                                                      harga: 'harga',
+                                                      jumlah: 'jumlah',
+                                                      modal: 'modal',
+                                                      namaBarang: 'namaBarang'),
+                                                  "8uNJzT7cKFVvFjAJW2CN");
+                                            },
+                                            child: const Text("Simpan"),
+                                          ),
+                                        ),
                                         SizedBox(
                                             height: constraints.maxHeight * 0.2,
                                             child: CartTotal()),
@@ -142,4 +183,15 @@ class CatatPembukuan extends StatelessWidget {
       ),
     );
   }
+  // Future<String?> addSubInvoice(String id, String harga, String jumlah,
+  //     String modal, String namaBarang) async {
+  //   CollectionReference history =
+  //       FirebaseFirestore.instance.collection('history');
+  //   await history.doc(id).collection('daftarBeli').add({
+  //     'harga': harga,
+  //     'jumlah': jumlah,
+  //     'modal': modal,
+  //     'namaBarang': namaBarang
+  //   });
+  // }
 }

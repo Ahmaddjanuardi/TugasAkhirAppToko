@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_akhir_toko/model/history_model.dart';
 import 'package:project_akhir_toko/model/product_model.dart';
 
 class FireStoreDB {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  // final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp();
-  // FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> addData(Product productModel) {
     return _firebaseFirestore.collection("product").add(productModel.toMap());
@@ -24,5 +23,27 @@ class FireStoreDB {
     // .get().then(
     //       (QuerySnapshot) => {QuerySnapshot.get()},
     // );
+  }
+
+  Future<void> deleteProduct(Product deletedProduct, String id) {
+    return _firebaseFirestore.collection("product").doc(id).delete();
+  }
+
+  Stream<List<History>> getAllHistory() {
+    return _firebaseFirestore.collection("history").snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) => History.fromSnapshot(doc)).toList();
+    });
+  }
+
+  Future<void> addHistory(History historyModel) {
+    return _firebaseFirestore.collection("history").add(historyModel.toMap());
+  }
+
+  Future<void> addSubHistory(DaftarBeli daftarBeliModel, String id) {
+    return _firebaseFirestore
+        .collection("history")
+        .doc(id)
+        .collection("daftarBeli")
+        .add(daftarBeliModel.toMap());
   }
 }
