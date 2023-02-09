@@ -7,10 +7,19 @@ class CartController extends GetxController {
   var _products = {}.obs;
 
   void addProduct(Product product) {
-    if (_products.containsKey(product)) {
-      _products[product] += 1;
+    var newProduct = {
+      "id": product.id,
+      "harga": product.hargaJual,
+      "jumlah": 1,
+      "modal": product.hargaModal,
+      "namaBarang": product.namaBarang
+    };
+    // _products[newProduct['namaBarang']]
+    if (_products.containsKey(newProduct['namaBarang'])) {
+      _products[newProduct['namaBarang']]['jumlah']++;
     } else {
-      _products[product] = 1;
+      newProduct['jumlah'] = 1;
+      _products[product.namaBarang] = newProduct;
     }
     Get.snackbar(
       "Product Added",
@@ -37,7 +46,8 @@ class CartController extends GetxController {
   get total {
     if (_products.isNotEmpty) {
       return _products.entries
-          .map((product) => int.parse(product.key.hargaJual) * product.value)
+          .map((product) =>
+              int.parse(product.value['harga']) * product.value['jumlah'])
           .toList()
           .reduce((value, element) => value + element)
           .toString();
@@ -49,7 +59,8 @@ class CartController extends GetxController {
   get modal {
     if (_products.isNotEmpty) {
       return _products.entries
-          .map((product) => int.parse(product.key.hargaModal) * product.value)
+          .map((product) =>
+              int.parse(product.value['modal']) * product.value['jumlah'])
           .toList()
           .reduce((value, element) => value + element)
           .toString();
@@ -62,13 +73,25 @@ class CartController extends GetxController {
     if (_products.isNotEmpty) {
       return _products.entries
           .map((product) =>
-              int.parse(product.key.hargaJual) -
-              int.parse(product.key.hargaModal))
+              int.parse(product.value['harga']) -
+              int.parse(product.value['modal']))
           .toList()
           .reduce((value, element) => value + element)
           .toString();
     } else {
       return '0';
     }
+  }
+
+  get productKeys {
+    return _products.keys.toList();
+  }
+
+  get productLength {
+    return _products.keys.toList().length;
+  }
+
+  get productValues {
+    return _products.values.toList();
   }
 }

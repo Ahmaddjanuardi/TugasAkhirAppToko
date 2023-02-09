@@ -30,22 +30,19 @@ class History {
 }
 
 class DaftarBeli {
-  final String id;
   final String harga;
   final String jumlah;
   final String modal;
   final String namaBarang;
 
   DaftarBeli(
-      {required this.id,
-      required this.harga,
+      {required this.harga,
       required this.jumlah,
       required this.modal,
       required this.namaBarang});
 
   Map<String, String> toMap() {
     return {
-      "id": id,
       "harga": harga,
       "jumlah": jumlah,
       "modal": modal,
@@ -55,7 +52,6 @@ class DaftarBeli {
 
   static DaftarBeli fromSnapshot(DocumentSnapshot snap) {
     DaftarBeli daftarBeli = DaftarBeli(
-        id: snap.id,
         harga: snap["harga"],
         jumlah: snap["jumlah"],
         modal: snap["modal"],

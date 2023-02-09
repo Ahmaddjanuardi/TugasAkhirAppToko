@@ -35,11 +35,14 @@ class FireStoreDB {
     });
   }
 
-  Future<void> addHistory(History historyModel) {
-    return _firebaseFirestore.collection("history").add(historyModel.toMap());
+  Future<String> addHistory(Map<String, dynamic> data) {
+    return _firebaseFirestore
+        .collection("history")
+        .add(data)
+        .then((value) => value.id);
   }
 
-  Future<void> addSubHistory(DaftarBeli daftarBeliModel, String id) {
+  Future addSubHistory(DaftarBeli daftarBeliModel, String id) {
     return _firebaseFirestore
         .collection("history")
         .doc(id)

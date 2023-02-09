@@ -3,9 +3,13 @@ import 'package:get/get.dart';
 import 'package:project_akhir_toko/controllers/cart_controller.dart';
 import 'package:project_akhir_toko/model/product_model.dart';
 
+import '../../controllers/product_controller.dart';
+
 class CartProducts extends StatelessWidget {
+  final Function addProductState;
+  CartProducts({Key? key, required this.addProductState}) : super(key: key);
+
   final CartController controller = Get.find();
-  CartProducts({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +18,10 @@ class CartProducts extends StatelessWidget {
         itemCount: controller.products.length,
         itemBuilder: (BuildContext context, index) {
           return CartProductCart(
-            controller: controller,
             product: controller.products.keys.toList()[index],
-            quantity: controller.products.values.toList()[index],
+            detail: controller.products.values.toList()[index],
             index: index,
+            addProductState: addProductState,
           );
         },
       ),
@@ -26,18 +30,22 @@ class CartProducts extends StatelessWidget {
 }
 
 class CartProductCart extends StatelessWidget {
-  final CartController controller;
-  final Product product;
-  final int quantity;
+  final Function addProductState;
+  final String product;
+  final Map<String, dynamic> detail;
   final int index;
 
-  const CartProductCart(
+  CartProductCart(
       {Key? key,
-      required this.controller,
       required this.product,
-      required this.quantity,
-      required this.index})
+      required this.detail,
+      required this.index,
+      required this.addProductState})
       : super(key: key);
+
+  final ProductController productController = Get.find();
+
+  final CartController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,21 +65,24 @@ class CartProductCart extends StatelessWidget {
               width: 20,
             ),
             Expanded(
-              child: Text(product.namaBarang),
+              child: Text(product),
             ),
             IconButton(
               onPressed: () {
-                controller.removeProduct(product);
+                // controller.removeProduct(product);
               },
               icon: const Icon(
                 Icons.remove_circle,
                 size: 24.0,
               ),
             ),
-            Text("${quantity}"),
+            Text("${cartController.products[product]['jumlah']}"),
             IconButton(
               onPressed: () {
-                controller.addProduct(product);
+                cartController.addProduct(productController.products
+                    .firstWhere((element) => element.namaBarang == product));
+                addProductState();
+                // print(widget.controller.products[widget.product]);
               },
               icon: const Icon(
                 Icons.add_circle,

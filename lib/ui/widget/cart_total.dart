@@ -11,7 +11,6 @@ class CartTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // String totalHarga = '0';
-    print(controller.total);
     return Obx(
       () => FittedBox(
         fit: BoxFit.fitWidth,
